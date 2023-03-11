@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 /**
  * A callback function for LLEMU's center button.
  *
@@ -33,8 +34,6 @@ void initialize() {
 
 	// moving motors based on user input
 	pros::delay(1000);
-
-
 }
 
 /**
@@ -89,9 +88,21 @@ void opcontrol() {
 	while (true) {
 		// get contorller input
 		double fwd = controller.getAnalog(okapi::ControllerAnalog::leftY);
+		double spin = controller.getAnalog(okapi::ControllerAnalog::rightX);
 
 		// set voltage for groups -- to activate motors
-		g_drive.moveVoltage(std::clamp(fwd/2.0f, -1.0, 1.0) * 12000);
+		long vy = fwd/2.0f * 12000;
+		long vx = spin/2.0f * 7000;
+
+		pros::lcd::print(pros::text_format_e_t::E_TEXT_SMALL, "fwd: %f, spin: %f", fwd, spin);
+		pros::lcd::print(pros::text_format_e_t::E_TEXT_SMALL, "vy: %d, vx: %d", vy, vx);
+		// printf("fwd: %f, spin: %f", fwd, spin);
+		// printf("vy: %d, vx: %d", vy, vx);
+
+		// turning + moving for left + right
+		g_l.moveVoltage(vy + vx);
+		g_r.moveVoltage(vy - vx);
+
 
 		pros::delay(100);
 	}
