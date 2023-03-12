@@ -7,7 +7,6 @@ using namespace okapi;
 // extern Controller controller;
 extern Gamepad gamepad;
 
-
 // ------------------ drive motors ------------------
 // Drive Motors
 extern Motor m_lf;
@@ -53,9 +52,7 @@ extern Potentiometer p_meter;
 // for detecting goals
 extern pros::Optical optical;
 
-
 extern pros::ADIDigitalOut endgame_piston;
-
 
 extern pros::ADIDigitalOut elasticCatapultPiston;
 extern pros::ADIDigitalOut elasticCatapultPiston2;
@@ -67,7 +64,3 @@ extern pros::Optical back_optical;
 extern pros::ADIAnalogIn catapult_linetracker;
 extern pros::ADIAnalogIn brain_linetracker;
 extern pros::ADIAnalogIn intakeRamp_linetracker;
-
-
-
-

@@ -2,7 +2,7 @@
 
 // ------------------ Position ------------------
 
-class Odometry
+class Position
 {
 private:
     pros::Task *task;
@@ -13,4 +13,7 @@ public:
     ~Position();
 
     void run(void *param);
+    double get_heading();
+    double get_x();
+    double get_y();
 };
