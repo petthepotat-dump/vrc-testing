@@ -85,25 +85,27 @@ void autonomous() {
 void opcontrol() {
 	// configuration already set up
 
+	long vy, va, vl, vr;
 	while (true) {
-		// get contorller input
-		double fwd = controller.getAnalog(okapi::ControllerAnalog::leftY);
-		double spin = controller.getAnalog(okapi::ControllerAnalog::rightX);
+		// get gamepad input
+		double fwd = gamepad.leftY();
+		double spin = gamepad.rightX();
 
 		// set voltage for groups -- to activate motors
-		long vy = fwd/2.0f * 12000;
-		long vx = spin/2.0f * 7000;
+		vy = round(fwd * 0.5f * 12000);
+		va = round(spin * 0.5f * 12000);
 
-		pros::lcd::print(pros::text_format_e_t::E_TEXT_SMALL, "fwd: %f, spin: %f", fwd, spin);
-		pros::lcd::print(pros::text_format_e_t::E_TEXT_SMALL, "vy: %d, vx: %d", vy, vx);
+		pros::lcd::print(DISPLAY_TEXT_SMALL, "fwd: %f, spin: %f", fwd, spin);
+		pros::lcd::print(DISPLAY_TEXT_SMALL, "vy: %d, va: %d", vy, va);
 		// printf("fwd: %f, spin: %f", fwd, spin);
 		// printf("vy: %d, vx: %d", vy, vx);
 
 		// turning + moving for left + right
-		g_l.moveVoltage(vy + vx);
-		g_r.moveVoltage(vy - vx);
+		vl = std::clamp(vy + va, MIN_VOLTS, MAX_VOLTS);
+		vr = std::clamp(vy - va, MIN_VOLTS, MAX_VOLTS);
+		g_l.moveVoltage(vl);
+		g_r.moveVoltage(vr);
 
-
-		pros::delay(100);
+		pros::delay(UPDATE_PAUSE);
 	}
 }

@@ -82,8 +82,10 @@ void opcontrol(void);
 
 // TODO -- add more headers here
 
+#include "utils/constants.hpp"
 // TODO - add custom headers
 #include "profiles.hpp"
+#include "utils/controller.hpp"
 
 #endif
 

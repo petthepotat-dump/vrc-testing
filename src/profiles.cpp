@@ -5,7 +5,9 @@
 
 // ------------------ controller ------------------
 
-okapi::Controller controller(okapi::ControllerId::master);
+Gamepad gamepad(okapi::ControllerId::master);
+
+// okapi::Controller controller(okapi::ControllerId::master);
 
 
 // ------------------ drive motors ------------------
