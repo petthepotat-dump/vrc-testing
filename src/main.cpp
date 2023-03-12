@@ -95,8 +95,8 @@ void opcontrol() {
 		vy = round(fwd * 0.5f * 12000);
 		va = round(spin * 0.5f * 12000);
 
-		pros::lcd::print(DISPLAY_TEXT_SMALL, "fwd: %f, spin: %f", fwd, spin);
-		pros::lcd::print(DISPLAY_TEXT_SMALL, "vy: %d, va: %d", vy, va);
+		pros::screen::print(DISPLAY_TEXT_SMALL, 1, 0, 0, "fwd: %f, spin: %f", fwd, spin);
+		pros::screen::print(DISPLAY_TEXT_SMALL, 1, 0, 0, "vy: %d, va: %d", vy, va);
 		// printf("fwd: %f, spin: %f", fwd, spin);
 		// printf("vy: %d, vx: %d", vy, vx);
 
