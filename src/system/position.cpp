@@ -16,7 +16,7 @@ Position::~Position()
 void Position::run(void *param)
 {
     double dl, dr, currentLeft, currentRight, lastLeft = 0, lastRight = 0;
-    double lastHeading, currentHeading, dh;
+    double lastHeading, dh;
     while (true)
     {
         // collect motor + position data
@@ -32,9 +32,9 @@ void Position::run(void *param)
         // this hurts a lot but i gotta do it
         if (!imu.is_calibrating())
         {
-            currentHeading = imu.get_heading();
-            dh = currentHeading - lastHeading;
-            lastHeading = currentHeading;
+            this->theta = imu.get_heading();
+            dh = this->theta - lastHeading;
+            lastHeading = this->theta;
         }
 
         // debug
