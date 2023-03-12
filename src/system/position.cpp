@@ -15,7 +15,8 @@ Position::~Position()
 
 void Position::run(void *param)
 {
-    long dl, dr, currentLeft, currentRight, lastLeft = 0, lastRight = 0;
+    double dl, dr, currentLeft, currentRight, lastLeft = 0, lastRight = 0;
+    double lastHeading, currentHeading, dh;
     while (true)
     {
         // collect motor + position data
@@ -25,6 +26,16 @@ void Position::run(void *param)
         dr = currentRight - lastRight;
         lastLeft = currentLeft;
         lastRight = currentRight;
+        // TODO -- double memory errs
+
+        // gyro
+        // this hurts a lot but i gotta do it
+        if (!imu.is_calibrating())
+        {
+            currentHeading = imu.get_heading();
+            dh = currentHeading - lastHeading;
+            lastHeading = currentHeading;
+        }
 
         // debug
 
