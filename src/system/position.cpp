@@ -47,4 +47,15 @@ void Position::run(void *param)
 
 double Position::get_heading()
 {
+    return this->theta;
+}
+
+double Position::get_x()
+{
+    return this->x;
+}
+
+double Position::get_y()
+{
+    return this->y;
 }
